@@ -85,6 +85,18 @@ GestureDetector ctaBtn2({required String title,required Function()tap,required b
     ),
   );
 }
+GestureDetector ctaBtn3({required String title,required Function()tap,}) {
+  return GestureDetector(onTap: tap,
+    child: Container(
+      width: double.infinity,height: 43.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24.r),
+        color:AppColors.primary,
+      ),
+      child: Center(child: ctmTxtAct(title,AppColors.white,14.sp),),
+    ),
+  );
+}
 Column pageTitleDescription({required String title,required String description}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
