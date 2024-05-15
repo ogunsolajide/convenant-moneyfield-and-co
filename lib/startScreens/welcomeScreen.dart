@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:moneyfield/startScreens/loginFLow/loginScreen.dart';
 import 'package:moneyfield/startScreens/signUpPhoneNumber.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/iconsImages.dart';
@@ -93,7 +94,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       indicator(_controller),
       const Spacer(),
       loginSignUpBtn(
-          loginTap: () {  },
+          loginTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) =>
+                const LoginScreen()));
+          },
           signUpTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>

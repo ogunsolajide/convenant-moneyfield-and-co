@@ -44,6 +44,8 @@ dependencies:
   dio: ^4.0.6
   dio_logging_interceptor: ^1.0.1
   http: ^1.1.0
+  carousel_slider: ^4.2.1
+  dots_indicator: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

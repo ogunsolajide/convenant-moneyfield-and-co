@@ -1,5 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,16 +42,16 @@ Widget splashScreen() {
   return darkStatusBar(
       AnimatedSplashScreen(
         duration: 2000,
-        splash: SafeArea(
+        splash: SafeArea(top: true,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Spacer(),
              SizedBox(width: double.infinity,
-                 child: Image.asset(AppImages.splashImage, width: 200.w, height: 32.h,)),
+                 child: Image.asset(AppImages.splashImage, width: 291.w, height: 143.h,)),
               const Spacer(),
-              ctmTxtSF("Powered by Capital One",AppColors.neutral600,14.sp),
+              ctmTxtSF("Powered by CWG-PLC",AppColors.neutral600,14.sp),
               SizedBox(height: 20.h,),
           
             ],
@@ -65,7 +65,7 @@ Widget splashScreen() {
         nextScreen:const WelcomeScreen(),
         // splashTransition: SplashTransition.fadeTransition,
         // pageTransitionType: PageTransitionType.rightToLeft,
-        backgroundColor: AppColors.white,
+        backgroundColor: AppColors.green25EE,
       )
   );
 }

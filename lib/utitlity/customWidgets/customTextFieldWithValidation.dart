@@ -15,15 +15,18 @@ class CustomTextFieldWithValidation extends StatefulWidget {
   final RegExp regexp;
   final Function(bool) isValid;
   final TextInputType inputType;
+
   String?  labelText = "";
+  GlobalKey? formkey;
   bool? obsureText;
   bool? enabled = true;
   bool? isPhoneNumber = false;
+  bool? isPassword = false;
   CustomTextFieldWithValidation({
     super.key, required this.controller, required this.title,
      this.obsureText, required this.isValid,
     required this.inputType, this.enabled,this.isPhoneNumber, this.labelText,
-    required this.hint,
+    required this.hint,this.formkey,this.isPassword,
     required this.errorLengthMsg, required this.errorTextType,
     required this.requiredMessage, required this.label, required this.textLength, required this.regexp
   });
@@ -37,8 +40,9 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
   bool isTextFieldActive = false;
   bool isTextFieldNotEmpty = false;
   bool showSecondTitle = false;
+  bool obscure = true;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String errorMsg = '';
   bool obscurePassword = true;
   // bool isPassword = false;
@@ -126,7 +130,9 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
 
                     Expanded(
                       child: TextFormField(
-                        key: _formKey,
+                        key: widget.formkey,
+                        obscureText: widget.isPassword ==true?obscure:false,
+                       // key: _formKey,
                         textAlignVertical: TextAlignVertical.center,
                         textAlign: TextAlign.start,
                         controller: widget.controller,
@@ -152,6 +158,7 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
                             });
                           }
                         },
+
                         // onEditingComplete: (){
                         //   isTextFieldActive = false;
                         //   checkTextFieldStatus();
@@ -172,6 +179,7 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
                           checkTextFieldStatus();
                         },
                         decoration: InputDecoration(
+
                           counterText: "",
                           hintText: showSecondTitle?"":widget.hint,
                           hintStyle:TextStyle(
@@ -192,7 +200,21 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
                     widget.isPhoneNumber == true?
                     showSecondTitle?
                     Image.asset(AppImages.flag,width: 15.h,height:15.h,):SizedBox.shrink()
-                        :SizedBox.shrink()
+                        :
+                    widget.isPassword == true?
+
+                    GestureDetector(
+                      onTap: (){
+                        setState(() {
+                          obscure = !obscure;
+                        });
+                      },
+                        child: Icon(obscure?
+                        Icons.visibility_outlined:
+                          Icons.visibility_off_outlined,
+                          color: AppColors.neutral800,
+                          size: 15.sp,)):
+                    SizedBox.shrink()
                   ],
                 ),
               ),

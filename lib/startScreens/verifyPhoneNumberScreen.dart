@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:moneyfield/startScreens/setupPasscodeScreen.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/dialogs/otpResentDialog.dart';
 import 'package:moneyfield/utitlity/iconsImages.dart';
@@ -58,77 +60,73 @@ class _VerifyPhoneNumberScreenState extends State<VerifyPhoneNumberScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: screenPad(),
-            child: Column(children: [
-              gapH(5.h),
-              backAppBar(backTap: () {Navigator.pop(context); }),
-              gapH(12.h),
-              pageTitleDescription(
-                  title: 'Verify Your Phone Number',
-                  description: 'We’ve just sent you a 6 digit code. Check your messages and enter it here'
-              ),
-              gapH(22.h),
-              Expanded(child: SingleChildScrollView(child: Column(children: [
-                gapH(22.h),
-                PinInputTextField(
-                  pinLength: 6,controller: controller,
-                  keyboardType: TextInputType.number,autoFocus: true,
-                  decoration: BoxLooseDecoration(
-                    bgColorBuilder: PinListenColorBuilder(AppColors.neutral20,AppColors.neutral20,),
-                    strokeColorBuilder: PinListenColorBuilder(Colors.transparent,Colors.transparent),
-                    strokeWidth: 0,gapSpace: 10,
-                    radius: Radius.circular(6.r),
-                    textStyle: TextStyle(
-                        color: AppColors.black,
-                        fontSize: 28.sp,
-                        fontFamily: 'creatoDisplayBold',
-                    ),
-                  ),
-                  onSubmit: (pin){
+        body: Column(children: [
+          backAppBar(backTap: () {Navigator.pop(context); }),
+         Expanded(
+           child: Padding(padding: screenPad(),
+             child: Column(children: [
+               gapH(12.h),
+               pageTitleDescription(
+                   title: 'Verify Your Phone Number',
+                   description: 'We’ve just sent you a 6 digit code. Check your messages and enter it here'
+               ),
+               gapH(22.h),
+               Expanded(child: SingleChildScrollView(child: Column(children: [
+                 gapH(22.h),
+                 PinInputTextField(
+                   pinLength: 6,controller: controller,
+                   keyboardType: TextInputType.number,autoFocus: true,
+                   decoration: BoxLooseDecoration(
+                     bgColorBuilder: PinListenColorBuilder(AppColors.neutral20,AppColors.neutral20,),
+                     strokeColorBuilder: PinListenColorBuilder(Colors.transparent,Colors.transparent),
+                     strokeWidth: 0,gapSpace: 10,
+                     radius: Radius.circular(6.r),
+                     textStyle: TextStyle(
+                       color: AppColors.black,
+                       fontSize: 28.sp,
+                       fontFamily: 'creatoDisplayBold',
+                     ),
+                   ),
+                   onSubmit: (pin){
 
-                  },
-                  onChanged: (pin) {
-                    if(pin.length >5){
-                      setState(() {
-                        _pinValid =true;
-                      });
-                    }else{
-                      _pinValid = false;
-                    }
-                    // You can handle the OTP input here
-                    print("Pin: $pin");
-                  },
-                ),
-                gapH(30.h),
-                resendOtpWidget(tap: () {
+                   },
+                   onChanged: (pin) {
+                     if(pin.length >5){
+                       setState(() {
+                         _pinValid =true;
+                       });
+                     }else{
+                       _pinValid = false;
+                     }
+                     // You can handle the OTP input here
+                     print("Pin: $pin");
+                   },
+                 ),
+                 gapH(30.h),
+                 resendOtpWidget(tap: () {
                    _openResendOtpDialog();
-                }),
-                gapH(30.h),
-                ctmTxtAct("OTP expires in ${_formatTime(_remainingTime)}",AppColors.neutral100,12.sp)
+                 }),
+                 gapH(30.h),
+                 ctmTxtAct("OTP expires in ${_formatTime(_remainingTime)}",
+                     AppColors.neutral100,12.sp)
+               ],),)),
+
+               ctaBtn2(title:'Verify Phone number',
+                   tap: () {
+                     if(_pinValid||controller.text.length ==6) {
+                       Navigator.push(context,
+                           MaterialPageRoute(builder: (context) =>
+                           const SetupPasscodeScreen()));
+                     }
+                   }, active: _pinValid
+               ),
+               gapH(30.h),
+             ],),
+           ),
+         )
 
 
-
-
-              ],),)),
-
-              ctaBtn2(title:'Proceed',
-                  tap: () {
-                if(_pinValid) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) =>
-                      const VerifyPhoneNumberScreen()));
-                }
-
-                  }, active: _pinValid
-              ),
-              gapH(30.h),
-
-
-            ],),
-          ),
-        ),
+        ],),
       ),
     );
   }
@@ -137,35 +135,13 @@ class _VerifyPhoneNumberScreenState extends State<VerifyPhoneNumberScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return OtpResentDialog();
+        return const OtpResentDialog();
       },
     );
   }
            // Close the dialog
 
-  Container resendOtpWidget({required Function()tap}) {
-    return Container(
-                height: 44.h,width: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 14.w),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    color:AppColors.primaryInactive
-                ),
-                child: Row(children: [
-                  Image.asset(AppImages.caution,width: 14.w,height: 14.h,),
-                  gapW(5.w),
-                  ctmTxtAct("Didn’t get the OTP?",AppColors.neutral500,14.sp),
-                  Spacer(),
-                  GestureDetector(onTap: tap,
-                    child: Row(children: [
-                      Image.asset(AppImages.resend,width: 14.w,height: 14.h,),
-                      ctmTxtAct(" Resend OTP",AppColors.primary,12.sp),
-                    ],),
-                  ),
 
-                ],),
-              );
-  }
 
 
 }

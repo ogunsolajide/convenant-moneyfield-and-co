@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:moneyfield/utitlity/textWidget.dart';
 
 import '../colors.dart';
+import '../textWidget.dart';
 import '../widgets.dart';
 
 
-class OtpResentDialog extends StatefulWidget {
-  const OtpResentDialog({super.key});
 
-  @override
-  State<OtpResentDialog> createState() => _OtpResentDialogState();
-}
+class passwordCreatedDialog extends StatelessWidget {
+  const passwordCreatedDialog({super.key});
 
-class _OtpResentDialogState extends State<OtpResentDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -22,7 +18,7 @@ class _OtpResentDialogState extends State<OtpResentDialog> {
       child: Container(
         width: double.infinity,height: 472.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(22.r),
           color: AppColors.white,
         ),
         padding: screenPad(),
@@ -31,8 +27,8 @@ class _OtpResentDialogState extends State<OtpResentDialog> {
           children: [
             gapH(10.h),
             Lottie.asset('assets/json/success.json', height: 250.w, width: 250.h),
-            ctmTxtCrtB("OTP Resent",22.sp),
-            ctmTxtAct("Your OTP has been sent again",AppColors.neutral100,14.sp,maxLines: 2),
+            ctmTxtCrtB("Passcode created",22.sp),
+            ctmTxtAct("You have created your passcode",AppColors.neutral100,14.sp,maxLines: 2),
             Spacer(),
             ctaBtn3(title: "Enter OTP", tap:(){
               Navigator.pop(context);
@@ -43,5 +39,4 @@ class _OtpResentDialogState extends State<OtpResentDialog> {
       ),
     );
   }
-  
 }
