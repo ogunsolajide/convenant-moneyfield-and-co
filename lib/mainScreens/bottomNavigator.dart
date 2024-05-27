@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:moneyfield/mainScreens/home/homeScreen.dart';
+import 'package:moneyfield/mainScreens/investment/investmentScreen.dart';
+import 'package:moneyfield/mainScreens/profile/profileScreen.dart';
 import 'package:moneyfield/utitlity/iconsImages.dart';
 
 import '../utitlity/colors.dart';
+import 'card/cardScreen.dart';
 
 
 class BottomNavigator extends StatefulWidget {
@@ -22,9 +25,9 @@ class _BottomNavigatorState extends State<BottomNavigator>  with TickerProviderS
     super.initState();
     screens = [
       HomeScreen(),
-      Container(),
-      Container(),
-      Container(),
+      CardScreen(),
+      InvestmentScreen(),
+      ProfileScreen(),
     ];
     tabController = TabController(length: 4, vsync: this);
   }

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../colors.dart';
@@ -13,7 +15,8 @@ class CardWidget extends StatefulWidget {
   final String accountNumber;
   final String productName;
   final String balance;
-  const CardWidget({super.key, required this.active, required this.accountNumber, required this.productName, required this.balance});
+  final Function ()addMoneyTap, sendMoneyTap;
+  const CardWidget({super.key, required this.active, required this.accountNumber, required this.productName, required this.balance, required this.addMoneyTap, required this.sendMoneyTap});
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -32,7 +35,7 @@ class _CardWidgetState extends State<CardWidget> {
       // padding:  widget.active?
       // EdgeInsets.symmetric(horizontal: 10.5.w,vertical: 20.h):
       // EdgeInsets.symmetric(horizontal: 10.5.w,vertical: 10.h),
-      margin: widget.active? EdgeInsets.only(left: 2.w,right: 2.w):EdgeInsets.zero,
+      margin: widget.active? EdgeInsets.only(left: 10.w,right: 1.w):EdgeInsets.zero,
       decoration: BoxDecoration(
           color: AppColors.primary500,
           borderRadius: BorderRadius.circular(18.r),
@@ -98,39 +101,45 @@ class _CardWidgetState extends State<CardWidget> {
           const Spacer(),
 
           Row(children: [
-            Container(
-              width:144.w,
-              height: 32.h,
-              decoration: BoxDecoration(
-                color: AppColors.neutral20,
-                borderRadius: BorderRadius.circular(16.r),
+            GestureDetector(
+              onTap: widget.addMoneyTap,
+              child: Container(
+                width:144.w,
+                height: 32.h,
+                decoration: BoxDecoration(
+                  color: AppColors.neutral20,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(AppImages.addCircle,width: 20.w,height:20.h),
+                    gapW(4.w),
+                    ctmTxtAct("Add money",AppColors.neutral600,12.sp,weight: FontWeight.w600),
+                  ],),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(AppImages.addCircle,width: 20.w,height:20.h),
-                  gapW(4.w),
-                  ctmTxtAct("Add money",AppColors.neutral600,12.sp,weight: FontWeight.w600),
-                ],),
             ),
             gapW(8.w),
-            Container(
-              width:144.w,
-              height:32.h,
-              decoration: BoxDecoration(
-                border: Border.all(color:AppColors.white,width: 0.5.r),
-                color: AppColors.primary500,
-                borderRadius: BorderRadius.circular(16.r),
+            GestureDetector(
+              onTap: widget.sendMoneyTap,
+              child: Container(
+                width:144.w,
+                height:32.h,
+                decoration: BoxDecoration(
+                  border: Border.all(color:AppColors.white,width: 0.5.r),
+                  color: AppColors.primary500,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(AppImages.sendCircle,width:20.w,height: 20.h,),
+                    gapW(4.w),
+                    ctmTxtAct("Send money",AppColors.white,12.sp,weight: FontWeight.w600),
+                  ],),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(AppImages.sendCircle,width:20.w,height: 20.h,),
-                  gapW(4.w),
-                  ctmTxtAct("Add money",AppColors.white,12.sp,weight: FontWeight.w600),
-                ],),
             )
           ],),
 

@@ -400,7 +400,7 @@ Widget transactionHistoryPreviewWidget({required bool isDebit,required Function(
         SizedBox(width: 193.w,
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ctmTxtAct(title,AppColors.neutral600,14.sp,weight: FontWeight.bold,maxLines: 1),
+              ctmTxtAct(title,AppColors.neutral600,14.sp,weight: FontWeight.w500,maxLines: 1),
               ctmTxtAct(date,AppColors.neutral200,11.sp,weight: FontWeight.normal),
             ],
           ),
@@ -428,6 +428,40 @@ DotsIndicator indicator2({required list, required int currentIndex}) {
       size: Size(10.w,6.h),
       activeSize:  Size(20.w,6.h),
       activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.r)),
+    ),
+  );
+}
+Future<dynamic> openBottomSheet(BuildContext context,Widget bottomScreen) {
+  return showModalBottomSheet(
+      isDismissible: true,
+      isScrollControlled: true,
+      context: context,
+      // backgroundColor:AppColors.white,
+      shape:RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(24.r),topLeft: Radius.circular(24.r)),
+      ),
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        child:  bottomScreen,
+      )
+  );
+}
+
+SafeArea backTextAppBar({required Function() backTap}) {
+  return SafeArea(top: true,
+    child: Container(
+      width: double.infinity,
+      color: AppColors.white,
+      padding: EdgeInsets.symmetric(horizontal:16.w,vertical: 10.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(onTap: backTap,
+              child: Icon(Icons.arrow_back_ios_new_sharp,size: 18.h,color: AppColors.black,)),
+          gapW(20.w),
+          ctmTxtCrtR("Transfer funds",AppColors.black,16.sp,weight: FontWeight.w500)
+        ],),
     ),
   );
 }

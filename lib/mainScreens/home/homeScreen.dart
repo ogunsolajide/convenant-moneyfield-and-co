@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:moneyfield/mainScreens/home/transferFunds/selectTransferOptionScreen.dart';
+import 'package:moneyfield/utitlity/bottomSheets/moreOptionBottomSheet.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/constants.dart';
 import 'package:moneyfield/utitlity/customWidgets/customCardWidget.dart';
@@ -56,7 +58,8 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ),
           child: Column(children: [
-            homeAppBar(profileTap: () {  }, idCardTap: () {  }, notificationTap: () {  }),
+            homeAppBar(
+                profileTap: () {  }, idCardTap: () {  }, notificationTap: () {  }),
             gapH(10.h),
             cardSlider(),
             gapH(20.h),
@@ -64,7 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const Spacer(),
             homeSixOptionitems(
                 billsTap: (){}, airtimeTap: (){},
-                dataTap: (){}, loansTap:(){}, moreTap: (){}
+                dataTap: (){}, loansTap:(){}, moreTap: (){
+                 _openMoreOptions();
+             }
             ),
             gapH(25.h),
           ],),
@@ -90,6 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     ],),);
   }
+  _openMoreOptions(){
+    openBottomSheet( context, MoreOptionBottomSheet());
+  }
 
 
   
@@ -100,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             CarouselSlider.builder(
                 itemCount: demoAccounts.length,
                 options: CarouselOptions(
-                  pageSnapping: false,
+                  //pageSnapping: false,
                   //scrollPhysics: BouncingScrollPhysics(),
                   height: 191.h,
                   padEnds: false,
@@ -128,6 +136,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     accountNumber:account.accountnumber??"",
                     productName: account.productName??"",
                     balance: account.balance.toString()??"",
+                    addMoneyTap: () {  },
+                    sendMoneyTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) =>
+                          const SelectTransferScreen()));
+                    }
+                    ,
                   );
               },
             )

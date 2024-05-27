@@ -11,6 +11,8 @@ class AppImages {
   static const String biometric = "assets/images/biometric.png";
   static const String documentation = "assets/images/documentation.png";
   static const String noise = "assets/images/noise.png";
+  static const String appCard = "assets/images/app_card.png";
+
 
   static const String homeFilled = "assets/icons/home_filled.png";
   static const String home = "assets/icons/home.png";
@@ -32,6 +34,9 @@ class AppImages {
   static const String loans ="assets/icons/real_estate_agent.png";
   static const String credit ="assets/icons/credit.png";
   static const String debit ="assets/icons/debit.png";
+  static const String receipt ="assets/icons/receipt_long.png";
+  static const String repeat ="assets/icons/repeat.png";
+  static const String bookings = "assets/icons/bookings.png";
 
 
 }

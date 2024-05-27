@@ -27,10 +27,15 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Moneyfield MFB',
             theme: ThemeData(
+              scaffoldBackgroundColor: AppColors.white,
+              bottomSheetTheme: BottomSheetThemeData(
+                backgroundColor: AppColors.white,
+              ),
              // scaffoldBackgroundColor: AppColors.white,
               primarySwatch: Colors.blue,
               // useMaterial3: true,
             ),
+
             home: splashScreen(),
           );
         }
