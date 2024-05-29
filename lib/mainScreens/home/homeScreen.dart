@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:moneyfield/mainScreens/home/AddMoneyOwnAccount.dart';
 import 'package:moneyfield/mainScreens/home/transferFunds/selectTransferOptionScreen.dart';
+import 'package:moneyfield/mainScreens/home/viewTransactionScreen.dart';
 import 'package:moneyfield/utitlity/bottomSheets/moreOptionBottomSheet.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/constants.dart';
@@ -83,7 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (BuildContext context, int index) {
               TransactionHistoryEntry entry = demoTransactionHistory[index];
           return transactionHistoryPreviewWidget(
-              transferTap: (){},
+              transferTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) =>
+                    const ViewTransactionScreen()));
+              },
               title: entry.title,
               date:entry.date,
               amount: entry.amount, isDebit: entry.isDebit
@@ -136,11 +142,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     accountNumber:account.accountnumber??"",
                     productName: account.productName??"",
                     balance: account.balance.toString()??"",
-                    addMoneyTap: () {  },
+                    addMoneyTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) =>
+                           AddMoneyOwnAccountScreen(initialSelectedIndex: _currentAccountIndex,)));
+                    },
                     sendMoneyTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) =>
-                          const SelectTransferScreen()));
+                          SelectTransferScreen(initialSelectedIndex: _currentAccountIndex,)));
                     }
                     ,
                   );

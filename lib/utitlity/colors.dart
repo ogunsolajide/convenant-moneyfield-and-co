@@ -21,6 +21,7 @@ class AppColors {
   static const neutral800 = Color(0xFF0D0D0D);
   static const green50 = Color(0xFFE6F3EE);
   static const green25 = Color(0xFFEDF7F3);
+  static const lightGreen500 = Color(0xFF7AC141);
   static const primary300 = Color(0xFF55AF8B);
   static const primary500 = Color(0xFF018752);
   static const green25EE = Color(0xFFEBF0EE);
@@ -30,6 +31,8 @@ class AppColors {
   static const primary25= Color(0xFFEBF0EE);
   static const red100= Color(0xFFE30000);
   static const red25= Color(0xFFF6E5E5);
+  static const redAA = Color(0xFFAA0000);
+  static const redDA = Color(0xFFFFDADA);
   static const blue1= Color(0xFF0071DB);
   static const blue2= Color(0xFFCDE7FF);
   static const yellow1= Color(0xFFDBC500);

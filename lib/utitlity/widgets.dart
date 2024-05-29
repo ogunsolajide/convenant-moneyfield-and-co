@@ -1,3 +1,5 @@
+import "package:carousel_slider/carousel_options.dart";
+import "package:carousel_slider/carousel_slider.dart";
 import "package:dots_indicator/dots_indicator.dart";
 import"package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
@@ -124,6 +126,29 @@ Widget backAppBar({required Function()backTap}) {
         ],),
         gapH(10.h),
       ],
+    ),
+  );
+}
+Widget backAppBarAndTitle({required Function()backTap,required String title}) {
+  return Container(
+    //height: 82.h,
+    padding: screenPad(),
+    child: SafeArea(top: true,
+      child: Column(
+        children: [
+          gapH(10.h),
+          Row(children: [
+            GestureDetector(onTap: backTap,
+                child: Icon(Icons.arrow_back_ios_new_sharp,
+                  size: 18.h,color: AppColors.black,)
+            ),
+            gapW(10.w),
+            ctmTxtCrtR(title,AppColors.black,16.sp,weight: FontWeight.w500)
+
+          ],),
+          gapH(10.h),
+        ],
+      ),
     ),
   );
 }
@@ -448,20 +473,83 @@ Future<dynamic> openBottomSheet(BuildContext context,Widget bottomScreen) {
   );
 }
 
-SafeArea backTextAppBar({required Function() backTap}) {
-  return SafeArea(top: true,
-    child: Container(
-      width: double.infinity,
-      color: AppColors.white,
-      padding: EdgeInsets.symmetric(horizontal:16.w,vertical: 10.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(onTap: backTap,
-              child: Icon(Icons.arrow_back_ios_new_sharp,size: 18.h,color: AppColors.black,)),
-          gapW(20.w),
-          ctmTxtCrtR("Transfer funds",AppColors.black,16.sp,weight: FontWeight.w500)
-        ],),
+// SafeArea backTextAppBar({required Function() backTap}) {
+//   return SafeArea(top: true,
+//     child: Container(
+//       width: double.infinity,
+//       color: AppColors.white,
+//       padding: EdgeInsets.symmetric(horizontal:16.w,vertical: 10.h),
+//       child: Row(
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           GestureDetector(onTap: backTap,
+//               child: Icon(Icons.arrow_back_ios_new_sharp,size: 18.h,color: AppColors.black,)),
+//           gapW(20.w),
+//           ctmTxtCrtR("Transfer funds",AppColors.black,16.sp,weight: FontWeight.w500)
+//         ],),
+//     ),
+//   );
+// }
+SizedBox customCarouselSlider(context,{required double height,
+  required int itemCount,
+  required int initialPage, required Function(int, CarouselPageChangedReason)onPageChanged,
+  required Widget Function(BuildContext, int, int) itemBuilder,
+  double enlargeFactor = 0.3
+}) {
+  return SizedBox(height: height,width: double.infinity,
+      child:
+      CarouselSlider.builder(
+        itemCount: itemCount,
+        options: CarouselOptions(
+          pageSnapping: true,
+          //scrollPhysics: BouncingScrollPhysics(),
+          height: height,
+          padEnds: false,
+          disableCenter: false,
+          enlargeCenterPage: true,
+          enlargeFactor: enlargeFactor,
+          enlargeStrategy: CenterPageEnlargeStrategy.scale,
+          //height: 400,
+          // aspectRatio: 16/19,
+          viewportFraction: 0.89,
+          initialPage: initialPage,
+          enableInfiniteScroll: false,
+          reverse: false,
+          autoPlay: false,
+          onPageChanged:  onPageChanged,
+          scrollDirection: Axis.horizontal,
+        ),
+        itemBuilder:itemBuilder,
+      )
+  );
+}
+Container ctmRoundCheckBox({required bool check}) {
+  return Container(
+    width: 16.w,height: 16.w,
+    decoration: BoxDecoration(
+        color: AppColors.white,
+        shape: BoxShape.circle,
+        border: Border.all(color: check?AppColors.primary:AppColors.primaryInactive,width: 1.0.r)
+    ),
+    child: check?
+    Center(child: Container(width: 10.w,height: 10.w,decoration: BoxDecoration(
+        shape: BoxShape.circle,color: AppColors.primary
+    ),),):SizedBox.shrink(),
+  );
+}
+
+Widget dropDownOptionWidget({required String title,required Function()tapArrow,
+  required bool isOpen}) {
+  return Padding(
+    padding: screenPad(),
+    child: Row(
+      children: [
+        ctmTxtAct(title,AppColors.neutral80,14.sp),
+        const Spacer(),
+        GestureDetector(onTap: tapArrow,child:
+        Icon(isOpen?Icons.keyboard_arrow_up:Icons.keyboard_arrow_down,color: AppColors.neutral80,size: 25.r,
+        )),
+      ],
     ),
   );
 }

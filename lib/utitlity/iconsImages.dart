@@ -37,6 +37,12 @@ class AppImages {
   static const String receipt ="assets/icons/receipt_long.png";
   static const String repeat ="assets/icons/repeat.png";
   static const String bookings = "assets/icons/bookings.png";
+  static const String share = "assets/icons/reply_all.png";
+  static const String download = "assets/icons/file_download.png";
+  static const String bank = "assets/icons/bank.png";
+  static const String smallAppIcon = "assets/icons/small_app_icon.png";
+  static const String own = "assets/icons/own.png";
+
 
 
 }
