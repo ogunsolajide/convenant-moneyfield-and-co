@@ -34,13 +34,15 @@ class CustomSuccessDialog extends StatelessWidget {
             ctmTxtCrtB(title,22.sp),
             ctmTxtAct(description,AppColors.neutral100,14.sp,maxLines: 2,),
             showActionBtn?
-            Column(children: [
-              const Spacer(),
-              ctaBtn3(title: "Proceed", tap:(){
-                Navigator.pop(context);
-              },),
-              const Spacer(),
-            ],):gapH(20.h),
+            Expanded(
+              child: Column(children: [
+                const Spacer(),
+                ctaBtn3(title: "Proceed", tap:(){
+                  Navigator.pop(context,true);
+                },),
+                const Spacer(),
+              ],),
+            ):gapH(20.h),
           ],
         ),
       ),

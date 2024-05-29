@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moneyfield/startScreens/confirmPasscodeScreen.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
-import '../utitlity/colors.dart';
-import '../utitlity/widgets.dart';
+import '../../utitlity/colors.dart';
+import '../../utitlity/dialogs/customSuccessDialog.dart';
+import '../../utitlity/widgets.dart';
 
-
-class SetupPasscodeScreen extends StatefulWidget {
-  const SetupPasscodeScreen({super.key});
+class ConfirmTransactionPinScreen extends StatefulWidget {
+  final String firstPin;
+  const ConfirmTransactionPinScreen({super.key,
+    required this.firstPin});
 
   @override
-  State<SetupPasscodeScreen> createState() => _SetupPasscodeScreenState();
+  State<ConfirmTransactionPinScreen> createState() => _ConfirmTransactionPinScreenState();
 }
 
-class _SetupPasscodeScreenState extends State<SetupPasscodeScreen> {
+class _ConfirmTransactionPinScreenState extends State<ConfirmTransactionPinScreen> {
   TextEditingController controller = TextEditingController();
   bool _passCodeValid = false;
   @override
@@ -29,15 +30,15 @@ class _SetupPasscodeScreenState extends State<SetupPasscodeScreen> {
                 gapH(12.h),
                 SizedBox(width: double.infinity,
                   child: pageTitleDescription(
-                  title: 'Setup Your Passcode',
-                  description:'Enter your desired 6 digit passcode'
+                      title: 'Confirm Your Pin',
+                      description:'Confirm your 4 digit pin'
                   ),
                 ),
                 gapH(22.h),
                 Expanded(child: SingleChildScrollView(child: Column(children: [
                   gapH(22.h),
                   PinInputTextField(
-                    pinLength: 6,controller: controller,
+                    pinLength: 4,controller: controller,
                     keyboardType: TextInputType.number,autoFocus: true,
                     decoration: BoxLooseDecoration(
                       bgColorBuilder: PinListenColorBuilder(AppColors.neutral20,AppColors.neutral20,),
@@ -54,11 +55,16 @@ class _SetupPasscodeScreenState extends State<SetupPasscodeScreen> {
 
                     },
                     onChanged: (pin) {
-                      if(pin.length >5){
+                      if(pin.toString() == widget.firstPin){
                         setState(() {
-                          _passCodeValid =true;
+                          _passCodeValid = true;
                         });
-                      }else{
+                      }else if(pin != widget.firstPin){
+                        setState(() {
+                          _passCodeValid = false;
+                        });
+                      }
+                      else{
                         _passCodeValid = false;
                       }
                       // You can handle the OTP input here
@@ -70,13 +76,12 @@ class _SetupPasscodeScreenState extends State<SetupPasscodeScreen> {
 
                 ],),)),
 
-                ctaBtn2(title:'Confirm Passcode',
+                ctaBtn2(title:'Confirm Pin',
                     tap: () {
                       if(_passCodeValid) {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) =>
-                             ConfirmPasscodeScreen(firstPasscode: controller.text??"")));
+                        _openPinCreatedDialog();
                       }
+                      print("first password ${widget.firstPin}");
                     }, active: _passCodeValid
                 ),
                 gapH(30.h),
@@ -88,5 +93,19 @@ class _SetupPasscodeScreenState extends State<SetupPasscodeScreen> {
         ],),
       ),
     );
+  }
+  _openPinCreatedDialog() async{
+    FocusManager.instance.primaryFocus?.unfocus();
+    var result = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CustomSuccessDialog(
+            title: "Pin created",
+            description: "You have created your transaction pin",
+            showActionBtn: false);
+      },
+    );
+    Navigator.pop(context,true);
+
   }
 }

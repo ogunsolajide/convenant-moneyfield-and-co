@@ -130,6 +130,7 @@ class _CustomTextFieldWithValidationState extends State<CustomTextFieldWithValid
 
                     Expanded(
                       child: TextFormField(
+                        enabled: widget.enabled,
                         key: widget.formkey,
                         obscureText: widget.isPassword ==true?obscure:false,
                        // key: _formKey,

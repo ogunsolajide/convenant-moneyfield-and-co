@@ -129,6 +129,30 @@ Widget backAppBar({required Function()backTap}) {
     ),
   );
 }
+Widget backAppBarWithLogo({required Function()backTap}) {
+  return Container(height: 82.h,
+    color: AppColors.neutral10,
+    padding: screenPad(),
+    child: SafeArea(top: true,
+      child: Column(
+        children: [
+          const Spacer(),
+          Row(children: [
+            GestureDetector(onTap: backTap,
+                child: Icon(Icons.arrow_back_ios_new_sharp,
+                  size: 18.h,color: AppColors.black,)),
+            Spacer(),
+            Image.asset(AppImages.logo,width: 40.h,height: 40.h,),
+            Spacer(),
+            SizedBox(width: 19.h,)
+
+          ],),
+          gapH(10.h),
+        ],
+      ),
+    ),
+  );
+}
 Widget backAppBarAndTitle({required Function()backTap,required String title}) {
   return Container(
     //height: 82.h,
@@ -301,17 +325,17 @@ SafeArea homeAppBar({required Function() profileTap,required Function() idCardTa
           Row(children: [
             GestureDetector(onTap: profileTap,
               child: Image.asset(AppImages.profile,
-                width: 35.w,height: 35.w,color: AppColors.neutral600,),
+                width: 35.w,height: 35.w,color: AppColors.white,),
             ),
             const Spacer(),
             GestureDetector(onTap: idCardTap,
-              child: Image.asset(AppImages.idCard,width: 18.w,height: 18.h,
+              child: Image.asset(AppImages.idCard,width: 18.w,height: 18.h,color: AppColors.white,
               ),
             ),
             gapW(10.w),
             GestureDetector(onTap: notificationTap,
               child: Image.asset(AppImages.notificationActive,
-                width: 18.w,height: 18.h,color: AppColors.neutral600,),
+                width: 18.w,height: 18.h,color: AppColors.white,),
             ),
 
           ],),
@@ -328,14 +352,14 @@ Widget homeItemOption({required Function() tap,required String title,required St
         width: 40.w,height: 40.h,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: AppColors.green25
+            color: AppColors.green600
         ),
         child: Center(child:
-        Image.asset(icon,width: 24.w,height: 24.h,),
+        Image.asset(icon,width: 24.w,height: 24.h,color: AppColors.white,),
         ),
       ),
       gapH(14.h),
-      ctmTxtAct(title,AppColors.neutral200,12.sp,weight: FontWeight.bold),
+      ctmTxtAct(title,AppColors.white,12.sp,weight: FontWeight.w600),
     ],),
   );
 }
@@ -447,9 +471,9 @@ DotsIndicator indicator2({required list, required int currentIndex}) {
     position: currentIndex,
     decorator: DotsDecorator(
       activeColor: AppColors.primary,
-      color: AppColors.green50,
+      color: AppColors.green100,
       spacing: EdgeInsets.symmetric(horizontal: 5.w),
-      shape: const Border(),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.r)),
       size: Size(10.w,6.h),
       activeSize:  Size(20.w,6.h),
       activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.r)),
@@ -552,4 +576,38 @@ Widget dropDownOptionWidget({required String title,required Function()tapArrow,
       ],
     ),
   );
+}
+
+Column titleIcon() {
+  return Column(crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      SizedBox(width: double.infinity,),
+      gapH(180.h),
+      Image.asset(AppImages.logo,
+        width: 50.w,height: 50.h,),
+      gapH(25.h),
+    ],
+  );
+}
+
+Container appBarBottomSheet({required String title,required Function backTap}) {
+  return Container(
+    width: double.infinity,height: 76.h,
+    padding:EdgeInsets.fromLTRB(16.w, 0.h, 16.w, 0.h),
+    // decoration: BoxDecoration(
+    //   color: AppColors.white,
+    // ),
+    child: Row(crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        backArrow(backTap,),
+        gapW(10.w),
+        ctmTxtAct(title,AppColors.black1f,18.sp),
+
+      ],),
+  );
+}
+
+GestureDetector backArrow(tap) {
+  return GestureDetector(onTap: tap,child:
+  Icon(Icons.arrow_back_ios_new_sharp,size: 18.h,color: AppColors.black,));
 }

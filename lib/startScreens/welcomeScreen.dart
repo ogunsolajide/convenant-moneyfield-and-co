@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:moneyfield/startScreens/loginFLow/loginScreen.dart';
-import 'package:moneyfield/startScreens/signUpPhoneNumber.dart';
+import 'package:moneyfield/startScreens/signUpExistingUserFlow/signUpExistingUserScreen.dart';
+import 'package:moneyfield/startScreens/signUpFlow/signUpNEwUser.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/iconsImages.dart';
 import 'package:moneyfield/utitlity/textWidget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../utitlity/bottomSheets/sigupTypeBottomSheet.dart';
 import '../utitlity/constants.dart';
 import '../utitlity/widgets.dart';
 
@@ -100,9 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const LoginScreen()));
           },
           signUpTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) =>
-                const SignUpPhoneNumberScreen()));
+            _openSignUpOption();
 
           }
       ),
@@ -112,6 +112,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
       ],),
     );
+  }
+
+  _openSignUpOption()async{
+   var option = await openBottomSheet( context, SignUpTypeBottomSheet());
+   if(option!=null){
+     if(option ==1){
+       Navigator.push(context,
+           MaterialPageRoute(builder: (context) =>
+           const SignUpExistingUserScreen()));
+
+     }else if(option ==2){
+       Navigator.push(context,
+           MaterialPageRoute(builder: (context) =>
+           const SignUpNewUserScreen()));
+     }
+
+   }
+
   }
 
 

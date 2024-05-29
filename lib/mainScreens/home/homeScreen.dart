@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           width: double.infinity, height: 430.h,
           decoration: BoxDecoration(
-            color: AppColors.white,
+            color: AppColors.green900,
             border: Border(
               bottom: BorderSide(color: AppColors.neutral30,width: 0.5.r)
             )

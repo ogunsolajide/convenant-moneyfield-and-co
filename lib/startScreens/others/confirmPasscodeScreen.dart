@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moneyfield/startScreens/profileCreatedScreen.dart';
+import 'package:moneyfield/startScreens/others/profileCreatedScreen.dart';
 import 'package:moneyfield/utitlity/dialogs/customSuccessDialog.dart';
 import 'package:moneyfield/utitlity/dialogs/passwordCreatedDialog.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
-import '../utitlity/colors.dart';
-import '../utitlity/widgets.dart';
+import '../../utitlity/colors.dart';
+import '../../utitlity/widgets.dart';
 
 
 class ConfirmPasscodeScreen extends StatefulWidget {
@@ -104,13 +104,13 @@ class _ConfirmPasscodeScreenState extends State<ConfirmPasscodeScreen> {
         return CustomSuccessDialog(title: "Passcode created", description: "You have created your passcode", showActionBtn: false);
       },
     );
-   _openProfileCreatedScreen();
+   Navigator.pop(context,true);
 
   }
-  _openProfileCreatedScreen() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) =>
-        const ProfileCreatedScreen()));
-
-  }
+  // _openProfileCreatedScreen() {
+  //   Navigator.push(context,
+  //       MaterialPageRoute(builder: (context) =>
+  //       const ProfileCreatedScreen()));
+  //
+  // }
 }

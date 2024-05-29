@@ -4,14 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:moneyfield/startScreens/setupPasscodeScreen.dart';
+import 'package:moneyfield/startScreens/others/setupPasscodeScreen.dart';
 import 'package:moneyfield/utitlity/colors.dart';
 import 'package:moneyfield/utitlity/dialogs/otpResentDialog.dart';
 import 'package:moneyfield/utitlity/iconsImages.dart';
 import 'package:moneyfield/utitlity/textWidget.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
 
-import '../utitlity/widgets.dart';
+import '../../utitlity/widgets.dart';
 
 
 class VerifyPhoneNumberScreen extends StatefulWidget {

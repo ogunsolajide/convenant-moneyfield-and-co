@@ -34,7 +34,8 @@ class MoreOptionBottomSheet extends StatelessWidget {
     );
   }
 
-  Widget optionWidget({required String title, required String description, required String image, required Function()tap}) {
+  Widget optionWidget({required String title, required String description,
+    required String image, required Function()tap}) {
     return GestureDetector(
       onTap: tap,
       child: Container(width: double.infinity,height: 60.h,

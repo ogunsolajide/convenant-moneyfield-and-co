@@ -37,7 +37,7 @@ class _CardWidgetState extends State<CardWidget> {
       // EdgeInsets.symmetric(horizontal: 10.5.w,vertical: 10.h),
       margin: widget.active? EdgeInsets.only(left: 10.w,right: 1.w):EdgeInsets.zero,
       decoration: BoxDecoration(
-          color: AppColors.primary500,
+          color: AppColors.green700,
           borderRadius: BorderRadius.circular(18.r),
           image: DecorationImage(image: AssetImage(AppImages.noise),fit: BoxFit.fill)
       ),

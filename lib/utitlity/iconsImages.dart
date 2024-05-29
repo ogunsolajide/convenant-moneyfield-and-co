@@ -42,6 +42,7 @@ class AppImages {
   static const String bank = "assets/icons/bank.png";
   static const String smallAppIcon = "assets/icons/small_app_icon.png";
   static const String own = "assets/icons/own.png";
+  static const String newDeviceIcon = "assets/icons/new_device_icon.png";
 
 
 

@@ -5,8 +5,8 @@ import 'package:moneyfield/startScreens/loginFLow/loginScreen.dart';
 import 'package:moneyfield/startScreens/welcomeScreen.dart';
 import 'package:moneyfield/utitlity/widgets.dart';
 
-import '../utitlity/colors.dart';
-import '../utitlity/textWidget.dart';
+import '../../utitlity/colors.dart';
+import '../../utitlity/textWidget.dart';
     
     
 class ProfileCreatedScreen extends StatefulWidget {

@@ -36,6 +36,7 @@ class CustomRegexp{
   static RegExp nameRegExp = RegExp(r'^[a-zA-ZÀ-ÿ-]+(?:\s[a-zA-ZÀ-ÿ-]+)*$');
   static RegExp phoneNumberExp = RegExp(r'^\+?\d{10}$');
   static RegExp anything =  RegExp(r'^.{3,}$', caseSensitive: false);
+  static RegExp bvn =  RegExp(r'^\+?\d{11}$', caseSensitive: false);
 
 
 
